@@ -9,7 +9,7 @@ python3 -m pacai.bin.pacman --fps=20 -p AStarFoodSearchAgent -l pacman_map_0
 ### Para rodar com o agente de busca gulosa
 
 ```bash
-python3 -m pacai.bin.pacman --fps=20 -p Greedy -l pacman_map_0
+python3 -m pacai.bin.pacman --fps=20 -p GreedyAgent -l pacman_map_0
 ```
 
 ### Para rodar com o agente de busca com os outros
