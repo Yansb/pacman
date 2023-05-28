@@ -7,7 +7,6 @@ Good luck and happy searching!
 
 import logging
 
-from pacai.student import search
 from pacai.core.actions import Actions
 from pacai.core.directions import Directions
 from pacai.core.distance import manhattan
@@ -182,75 +181,9 @@ def foodHeuristic(state, problem):
             heuristic_cost = maze(position, food, gameState)
     return heuristic_cost
 
-class ClosestDotSearchAgent(SearchAgent):
-    """
-    Search for all food using a sequence of searches.
-    """
-
-    def __init__(self, index, **kwargs):
-        super().__init__(index, **kwargs)
-
-    def registerInitialState(self, state):
-        self._actions = []
-        self._actionIndex = 0
-
-        currentState = state
-
-        while (currentState.getFood().count() > 0):
-            nextPathSegment = self.findPathToClosestDot(currentState)  # The missing piece
-            self._actions += nextPathSegment
-
-            for action in nextPathSegment:
-                legal = currentState.getLegalActions()
-                if action not in legal:
-                    raise Exception('findPathToClosestDot returned an illegal move: %s!\n%s' %
-                            (str(action), str(currentState)))
-
-                currentState = currentState.generateSuccessor(0, action)
-
-        logging.info('Path found with cost %d.' % len(self._actions))
-
-    def findPathToClosestDot(self, gameState):
-        """
-        Returns a path (a list of actions) to the closest dot, starting from gameState.
-        """
-
-        # Here are some useful elements of the startState
-        # startPosition = gameState.getPacmanPosition()
-        # food = gameState.getFood()
-        # walls = gameState.getWalls()
-        # problem = AnyFoodSearchProblem(gameState)
-
-        # *** Your Code Here ***
-        problem = AnyFoodSearchProblem(gameState)
-        return search.depthFirstSearch(problem)
-
 class AnyFoodSearchProblem(PositionSearchProblem):
-    """
-    A search problem for finding a path to any food.
-
-    This search problem is just like the PositionSearchProblem,
-    but has a different goal test, which you need to fill in below.
-    The state space and successor function do not need to be changed.
-
-    The class definition above, `AnyFoodSearchProblem(PositionSearchProblem)`,
-    inherits the methods of `pacai.core.search.position.PositionSearchProblem`.
-
-    You can use this search problem to help you fill in
-    the `ClosestDotSearchAgent.findPathToClosestDot` method.
-
-    Additional methods to implement:
-
-    `pacai.core.search.position.PositionSearchProblem.isGoal`:
-    The state is Pacman's position.
-    Fill this in with a goal test that will complete the problem definition.
-    """
-
     def __init__(self, gameState, start = None):
         super().__init__(gameState, goal = None, start = start)
-
-        # Store the food for later reference.
-
         self.food = gameState.getFood()
 
     def isGoal(self, state):
@@ -258,20 +191,3 @@ class AnyFoodSearchProblem(PositionSearchProblem):
             return True
         else:
             return False
-
-class ApproximateSearchAgent(BaseAgent):
-    """
-    Implement your contest entry here.
-
-    Additional methods to implement:
-
-    `pacai.agents.base.BaseAgent.getAction`:
-    Get a `pacai.bin.pacman.PacmanGameState`
-    and return a `pacai.core.directions.Directions`.
-
-    `pacai.agents.base.BaseAgent.registerInitialState`:
-    This method is called before any moves are made.
-    """
-
-    def __init__(self, index, **kwargs):
-        super().__init__(index, **kwargs)

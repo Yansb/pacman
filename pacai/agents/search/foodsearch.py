@@ -3,7 +3,7 @@ from pacai.core.search import search
 from pacai.core.search.food import FoodSearchProblem
 from pacai.student import searchAgents
 
-class AStarFoodSearchAgent(SearchAgent):
+class AStarAgent(SearchAgent):
     """
     A search agent for `pacai.core.search.food.FoodSearchProblem using A*
     and `pacai.student.searchAgents.foodHeuristic`.

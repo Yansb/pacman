@@ -14,7 +14,6 @@ import random
 import sys
 
 from pacai.agents.base import BaseAgent
-from pacai.agents.ghost.random import RandomGhost
 from pacai.agents.greedy import GreedyAgent
 from pacai.bin.arguments import getParser
 from pacai.core.actions import Actions
