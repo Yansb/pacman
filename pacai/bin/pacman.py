@@ -408,10 +408,15 @@ def runGames(layout, pacman, display, numGames, record = None, numTraining = 0,
         scores = [game.state.getScore() for game in games]
         wins = [game.state.isWin() for game in games]
         winRate = wins.count(True) / float(len(wins))
-        logging.info('Average Score: %s', sum(scores) / float(len(scores)))
-        logging.info('Scores:        %s', ', '.join([str(score) for score in scores]))
-        logging.info('Win Rate:      %d/%d (%.2f)' % (wins.count(True), len(wins), winRate))
-        logging.info('Record:        %s', ', '.join([['Loss', 'Win'][int(w)] for w in wins]))
+
+        average = 'Average Score: ' + str(sum(scores) / float(len(scores)))
+        scores = 'Scores:        ' + ', '.join([str(score) for score in scores])
+        winRate = 'Win Rate:      ' + str(winRate)
+        record = 'Record:        ' + ', '.join([['Loss', 'Win'][int(w)] for w in wins])
+        logging.info(average)
+        logging.info(scores)
+        logging.info(winRate)
+        logging.info(record)
 
     return games
 
