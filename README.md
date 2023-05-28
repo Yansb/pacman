@@ -23,3 +23,9 @@ python3 -m pacai.bin.pacman --fps=20 -p DepthSearchAgent -l pacman_map_0
   ```bash
 python3 -m pacai.bin.pacman --fps=20 -p BreadthSearchAgent -l pacman_map_0
 ```
+
+### Para rodar os testes
+
+```bash
+  ./run_tests.py
+```
