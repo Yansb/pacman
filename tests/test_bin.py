@@ -1,9 +1,8 @@
 import time
 import unittest
 
-from pacai.bin import capture
-from pacai.bin import gridworld
 from pacai.bin import pacman
+from pprint import pprint;
 
 """
 This is a test class to assess the executables of this project.
@@ -11,21 +10,26 @@ This is a test class to assess the executables of this project.
 class BinTest(unittest.TestCase):
 
     def test_pacman(self):
-        agents = ["GreedyAgent", "DepthSearchAgent", "BreadthSearchAgent"]
+        agents = ["GreedyAgent","DepthSearchAgent", "BreadthSearchAgent"]
         with open ('result.csv', 'w') as f:
-            f.write('Agent,Scores,milis\n')
+            f.write('Agent,Scores,Cost,Milis\n')
         for agent in agents:
             map = 1
             while map <= 100:
                 started = time.time()
                 games = pacman.main(['-p', agent, '--null-graphics', '-l', 'mapa' + str(map)])
                 ended = time.time()
+                totalCost = 0
+                for game in games:
+                    for a in game.agents:
+                        totalCost += a.totalCost
                 scores = [game.state.getScore() for game in games]
                 score = str(sum(scores))
                 milis = str((ended - started) * 1000)
                 with open('result.csv', 'a') as f:
                     f.write(agent + ',')
                     f.write(score + ',')
+                    f.write(str(totalCost) + ',')
                     f.write(milis + '\n')
                 map += 1
 

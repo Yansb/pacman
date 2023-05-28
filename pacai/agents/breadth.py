@@ -29,7 +29,7 @@ class BreadthSearchAgent(SearchAgent):
                             (str(action), str(currentState)))
 
                 currentState = currentState.generateSuccessor(0, action)
-
+        self.totalCost = len(self._actions)
         logging.info('Path found with cost %d.' % len(self._actions))
 
     def findPathToClosestDot(self, gameState):

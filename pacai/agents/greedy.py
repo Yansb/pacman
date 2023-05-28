@@ -8,8 +8,8 @@ class GreedyAgent(BaseAgent):
     """
     An agent that greedily takes the available move with the best score at the time.
     """
-
     def __init__(self, index, evalFn = "pacai.core.eval.score", **kwargs):
+        self.totalCost = 0
         super().__init__(index, **kwargs)
 
         self.evaluationFunction = reflection.qualifiedImport(evalFn)
@@ -25,5 +25,5 @@ class GreedyAgent(BaseAgent):
         scored = [(self.evaluationFunction(state), action) for state, action in successors]
         bestScore = max(scored)[0]
         bestActions = [pair[1] for pair in scored if pair[0] == bestScore]
-
+        self.totalCost += 1
         return random.choice(bestActions)
