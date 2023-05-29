@@ -1,8 +1,8 @@
+import os
 import time
 import unittest
 
 from pacai.bin import pacman
-from pprint import pprint;
 
 """
 This is a test class to assess the executables of this project.
@@ -11,7 +11,13 @@ class BinTest(unittest.TestCase):
 
     def test_pacman(self):
         agents = ["GreedyAgent","DepthSearchAgent", "BreadthSearchAgent"]
-        with open ('result.csv', 'w') as f:
+
+        absolutePath = os.path.dirname(os.path.abspath(__file__)) 
+        relativePath = 'results/result.csv'
+
+        path = absolutePath.replace('tests', relativePath)
+       
+        with open (path, 'w') as f:
             f.write('Agent,Scores,Cost,Milis\n')
         for agent in agents:
             map = 1
@@ -26,7 +32,7 @@ class BinTest(unittest.TestCase):
                 scores = [game.state.getScore() for game in games]
                 score = str(sum(scores))
                 milis = str((ended - started) * 1000)
-                with open('result.csv', 'a') as f:
+                with open(path, 'a') as f:
                     f.write(agent + ',')
                     f.write(score + ',')
                     f.write(str(totalCost) + ',')
