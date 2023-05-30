@@ -7,6 +7,9 @@ from pacai.student.searchAgents import AnyFoodSearchProblem
 class BreadthSearchAgent(SearchAgent):
     """
     Search for all food using a sequence of searches.
+
+    Estrutura semelhante a busca profunda mudando apenas a função de busca utilizada
+    no momento de encontrar o caminho para o ponto mais próximo.
     """
 
     def __init__(self, index, **kwargs):
@@ -19,7 +22,7 @@ class BreadthSearchAgent(SearchAgent):
         currentState = state
 
         while (currentState.getFood().count() > 0):
-            nextPathSegment = self.findPathToClosestDot(currentState)  # The missing piece
+            nextPathSegment = self.findPathToClosestDot(currentState)
             self._actions += nextPathSegment
 
             for action in nextPathSegment:

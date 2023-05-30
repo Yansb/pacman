@@ -144,46 +144,28 @@ def cornersHeuristic(state, problem):
     return min(nearest_corners)
 
 def foodHeuristic(state, problem):
-    """
-    Your heuristic for the FoodSearchProblem goes here.
-
-    This heuristic must be consistent to ensure correctness.
-    First, try to come up with an admissible heuristic;
-    almost all admissible heuristics will be consistent as well.
-
-    If using A* ever finds a solution that is worse than what uniform cost search finds,
-    your heuristic is *not* consistent, and probably not admissible!
-    On the other hand, inadmissible or inconsistent heuristics may find optimal solutions,
-    so be careful.
-
-    The state is a tuple (pacmanPosition, foodGrid) where foodGrid is a
-    `pacai.core.grid.Grid` of either True or False.
-    You can call `foodGrid.asList()` to get a list of food coordinates instead.
-
-    If you want access to info like walls, capsules, etc., you can query the problem.
-    For example, `problem.walls` gives you a Grid of where the walls are.
-
-    If you want to *store* information to be reused in other calls to the heuristic,
-    there is a dictionary called problem.heuristicInfo that you can use.
-    For example, if you only want to count the walls once and store that value, try:
-    ```
-    problem.heuristicInfo['wallCount'] = problem.walls.count()
-    ```
-    Subsequent calls to this heuristic can access problem.heuristicInfo['wallCount'].
-    """
-
+    # pega a posição atual e o grid com comidas
     position, foodGrid = state
+    # pega o estado atual do jogo
     gameState = problem.startingGameState
+    # inicializa o custo heuristico
     heuristic_cost = 0
+    # pega a lista de comidas
     food_left = foodGrid.asList()
+    # percorre todas as comidas
     for food in food_left:
+        # se o custo heuristico para a comida atual for maior que o custo heuristico
         if heuristic_cost < maze(position, food, gameState):
+            # atualiza o custo heuristico
             heuristic_cost = maze(position, food, gameState)
+    # retorna o custo heuristico
     return heuristic_cost
 
 class AnyFoodSearchProblem(PositionSearchProblem):
     def __init__(self, gameState, start = None):
+        # Passa os parametros para a classe pai
         super().__init__(gameState, goal = None, start = start)
+        # Pega a comida do estado
         self.food = gameState.getFood()
 
     def isGoal(self, state):
