@@ -23,10 +23,9 @@ class BinTest(unittest.TestCase):
         basePath = absolutePath.replace('tests', 'results/')
 
         resultPath = basePath + 'result.csv'
-        breadthSearchPath = basePath + 'breadthSearchAgent/breadthSearchAgent.csv'
-        depthSearchPath = basePath + 'depthSearchAgent/depthSearchAgent.csv'
-        greedyPath = basePath + 'greedyAgent/greedyAgent.csv'
-
+        breadthSearchPath = basePath + 'breadthSearchAgent.csv'
+        depthSearchPath = basePath + 'depthSearchAgent.csv'
+        greedyPath = basePath + 'greedySearchAgent.csv'
 
         with open (resultPath, 'w') as f:
             f.write('Agent,Scores,Cost,Milis\n')
