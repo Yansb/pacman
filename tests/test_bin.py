@@ -47,9 +47,10 @@ class BinTest(unittest.TestCase):
                 games = pacman.main(['-p', agent, '--null-graphics', '-l', 'mapa' + str(map)])
                 ended = time.time()
                 totalCost = 0
-                # for game in games:
-                    # for a in game.agents:
-                    #     totalCost += a.totalCost
+                if (agent != 'AStarAgent'):
+                    for game in games:
+                        for a in game.agents:
+                            totalCost += a.totalCost
                 scores = [game.state.getScore() for game in games]
                 score = str(sum(scores))
                 miliSecond = str((ended - started) * 1000)
@@ -61,7 +62,7 @@ class BinTest(unittest.TestCase):
                     self.writeInSpecificFile(breadthSearchPath, agent, score, miliSecond, totalCost)
                 elif agent == 'DepthSearchAgent':
                     self.writeInSpecificFile(depthSearchPath,agent, score, miliSecond, totalCost)
-                elif agent == 'GreedySearchAgent':
+                elif agent == 'GreedyAgent':
                     self.writeInSpecificFile(greedyPath,agent, score, miliSecond, totalCost)
                 elif agent == 'AStarAgent':
                     self.writeInSpecificFile(aStarPath,agent, score, miliSecond, totalCost)
