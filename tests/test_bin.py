@@ -47,10 +47,9 @@ class BinTest(unittest.TestCase):
                 games = pacman.main(['-p', agent, '--null-graphics', '-l', 'mapa' + str(map)])
                 ended = time.time()
                 totalCost = 0
-                if (agent != 'AStarAgent'):
-                    for game in games:
-                        for a in game.agents:
-                            totalCost += a.totalCost
+                for game in games:
+                    for a in game.agents:
+                        totalCost += a.totalCost
                 scores = [game.state.getScore() for game in games]
                 score = str(sum(scores))
                 miliSecond = str((ended - started) * 1000)

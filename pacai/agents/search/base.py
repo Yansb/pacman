@@ -50,6 +50,8 @@ class SearchAgent(BaseAgent):
         # The currentl action (from self._actions) that the agent is performing.
         self._actionIndex = 0
 
+        self.totalCost = 0
+
     def registerInitialState(self, state):
         """
         This is the first time that the agent sees the layout of the game board.
@@ -68,12 +70,12 @@ class SearchAgent(BaseAgent):
         self._actions = self.searchFunction(problem)  # Find a path.
         self._actionIndex = 0
 
-        totalCost = problem.actionsCost(self._actions)
+        self.totalCost = problem.actionsCost(self._actions)
 
         state.setHighlightLocations(problem.getVisitHistory())
 
         logging.info('Path found with total cost of %d in %.1f seconds' %
-                (totalCost, time.time() - starttime))
+                (self.totalCost, time.time() - starttime))
 
         logging.info('Search nodes expanded: %d' % problem.getExpandedCount())
 
